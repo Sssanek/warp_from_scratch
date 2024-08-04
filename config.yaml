@@ -1,0 +1,33 @@
+# config.yaml
+
+model_name: gpt2  # Название модели для WARP
+
+# Конфигурация для WARP
+warp:
+  I: 2                # Количество итераций
+  M: 2                # Количество запусков RL
+  T: 100              # Количество шагов обучения
+  mu: 0.01            # Скорость обновления EMA
+  eta: 0.5            # Скорость обновления LITI
+  beta: 0.5           # Коэффициент регуляризации
+  batch_size: 64      # Размер батча
+  optimizer:
+    type: adam        # Тип оптимизатора
+    lr: 1e-5          # Скорость обучения
+  prompt_length_min: 5  # Минимальная длина промпта
+  prompt_length_max: 15 # Максимальная длина промпта
+
+# Конфигурация для модели наград (reward model)
+reward:
+  model_name: distilbert-base-cased  # Название модели наград
+  train_data_path: ./data/train      # Путь к тренировочным данным
+  output_dir: ./reward_model              # Директория для сохранения результатов
+  epochs: 3                          # Количество эпох обучения
+  batch_size: 8                      # Размер батча для обучения модели наград
+  learning_rate: 2e-5                # Скорость обучения
+  max_length: 512                    # Максимальная длина токенов
+  logging_steps: 10                  # Шаги логирования
+
+# Конфигурация для данных
+data:
+  dataset_name: stanfordnlp/imdb     # Название датасета
